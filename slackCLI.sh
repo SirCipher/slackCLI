@@ -18,14 +18,13 @@ function howTo(){
     echo "-h displays this."
     echo "-m MESSAGE. Sends a message"
     echo "-i URL. Sends a message with an image url specified."
-    echo "-c. To be implemented. This will specify the channel."
-    echo "-s. To be implemented. This will specify the API key."
 }
 
-# Populates json with the supplied parameterss
+# Populates json with the supplied parameters.
 function create_payload(){
     json='{
         "text" : "'${message}'",
+        "channel" : "general",
         "attachments": [{
             "fallback": "",
             "color": "#36a64f",
@@ -34,25 +33,23 @@ function create_payload(){
     }'
 }
 
+# Uploads the file supplied. Updates the imageUrl variable for the payload.
 function upload(){
     wget https://raw.githubusercontent.com/SirCipher/imgur.sh/master/imgur.sh
     chmod a+x imgur.sh
     imageUrl=$(./imgur.sh ${filePath})
-    echo "Var: ${imageUrl}"
-
-    imageUrl="Image location: http://i.imgur.com/qGD50CC.png"
     imageUrl="$( cut -d ':' -f 2- <<< "$imageUrl" )";
     imageUrl="${imageUrl#"${imageUrl%%[![:space:]]*}"}"
     echo ${imageUrl}
 }
 
-# Check curl availability
+# Check curl availability.
 type curl &>/dev/null || {
     echo "Curl not found. Required." >&2
     exec 17
 }
 
-# Check if arguments are empty
+# Check if arguments are empty.
 if [ $# -eq 0 ]; then
     echo "No arguments supplied"
     echo
@@ -65,7 +62,8 @@ do
     case "${option}"
     in
             m)  message=${OPTARG};;
-            i)  imageUrl= ${OPTARG};;
+            i)  imageUrl=${OPTARG}
+                echo ${imageUrl};;
             h)  howTo;;
             u)  filePath=${OPTARG}
                 upload;;
