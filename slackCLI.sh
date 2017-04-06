@@ -2,6 +2,7 @@
 message=""
 json=""
 imageUrl=""
+filePath=""
 
 function send_message () {  
     create_payload
@@ -33,6 +34,13 @@ function create_payload(){
     }'
 }
 
+function upload(){
+    wget https://raw.githubusercontent.com/SirCipher/imgur.sh/master/imgur.sh
+    chmod a+x imgur.sh
+    imageUrl=$(./imgur.sh $filePath)
+    echo $imageUrl
+}
+
 # Check curl availability
 type curl &>/dev/null || {
     echo "Curl not found. Required." >&2
@@ -47,14 +55,19 @@ if [ $# -eq 0 ]; then
     exit 1
 fi
 
-while getopts i:m:c:h: option
+while getopts i:m:c:h:u: option
 do
     case "${option}"
     in
             m)  message=${OPTARG};;
             i)  imageUrl=${OPTARG};;
             h)  howto;; 
+            u)  filePath=${OPTARG}
+                upload;;
     esac
 done
 
 exit 0
+
+# Change imgur script to accept a quiet mode. That only posts the hosted url. Change the upload function of 
+# this script to pull the output and then parse it to $imageUrl
