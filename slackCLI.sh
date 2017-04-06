@@ -3,11 +3,12 @@ message=""
 json=""
 imageUrl=""
 filePath=""
-webhook="https://hooks.slack.com/services/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"
+footer=""
+webHook="https://hooks.slack.com/services/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"
 
 function send_message () {  
     create_payload
-    curl -s -d "payload=$json" ${webhook}
+    curl -s -d "payload=$json" ${webHook}
 }
 
 function howTo(){
@@ -25,12 +26,14 @@ function howTo(){
 function create_payload(){
     json='{
         "text" : "'${message}'",
-        "channel" : "general",
-        "attachments": [{
+        "attachments": [
+        {
             "fallback": "",
+            "author_name": "'${footer}'",
             "color": "#36a64f",
             "image_url": "'${imageUrl}'"
-        }]    
+        }
+    ]
     }'
 }
 
@@ -58,10 +61,11 @@ if [ $# -eq 0 ]; then
     exit 1
 fi
 
-while getopts i:m:h:u: option
+while getopts i:m:h:u:f: option
 do
     case "${option}"
     in
+            f)  footer=${OPTARG};;
             m)  message=${OPTARG};;
             i)  imageUrl=${OPTARG};;
             h)  howTo;;
