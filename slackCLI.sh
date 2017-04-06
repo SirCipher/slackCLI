@@ -9,13 +9,19 @@ json=""
 imageUrl=""
 filePath=""
 footer=""
+displayVar=''
 
 # Replace this variable with the Slack incoming webhook.
 webHook="https://hooks.slack.com/services/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"
 
 function send_message () {  
     create_payload
-    curl -s -d "payload=$json" ${webHook}
+
+    if [ "$displayVar" = "true" ]; then 
+        curl -s -d "payload=$json" ${webHook} > /dev/null
+    else
+        curl -s -d "payload=$json" ${webHook}
+    fi
 }
 
 function howTo(){
@@ -74,7 +80,7 @@ if [ $# -eq 0 ]; then
     exit 1
 fi
 
-while getopts i:m:h:u:f: option
+while getopts i:m:h:u:f:q option
 do
     case "${option}"
     in
@@ -84,6 +90,7 @@ do
             h)  howTo;;
             u)  filePath=${OPTARG}
                 upload;;
+            q)  displayVar=true;;
     esac
 done
 
