@@ -59,7 +59,7 @@ Adding an image
 
 Adding a footer to the uploaded image
 -------------------------------------
-``` ./slackCLI.sh -f "text"
+``` ./slackCLI.sh -f "text" ```
 
 Uploading an image
 ------------------
