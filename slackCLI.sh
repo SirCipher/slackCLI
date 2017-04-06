@@ -9,7 +9,7 @@ function send_message () {
     curl -s -d "payload=$json" https://hooks.slack.com/services/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
 }
 
-function howto(){
+function howTo(){
     echo "Usage:"
     echo
     echo "A simple Slack CLI that can send messages and images to a specified channel."
@@ -37,8 +37,13 @@ function create_payload(){
 function upload(){
     wget https://raw.githubusercontent.com/SirCipher/imgur.sh/master/imgur.sh
     chmod a+x imgur.sh
-    imageUrl=$(./imgur.sh $filePath)
-    echo $imageUrl
+    imageUrl=$(./imgur.sh ${filePath})
+    echo "Var: ${imageUrl}"
+
+    imageUrl="Image location: http://i.imgur.com/qGD50CC.png"
+    imageUrl="$( cut -d ':' -f 2- <<< "$imageUrl" )";
+    imageUrl="${imageUrl#"${imageUrl%%[![:space:]]*}"}"
+    echo ${imageUrl}
 }
 
 # Check curl availability
@@ -51,7 +56,7 @@ type curl &>/dev/null || {
 if [ $# -eq 0 ]; then
     echo "No arguments supplied"
     echo
-    howto
+    howTo
     exit 1
 fi
 
@@ -60,14 +65,15 @@ do
     case "${option}"
     in
             m)  message=${OPTARG};;
-            i)  imageUrl=${OPTARG};;
-            h)  howto;; 
+            i)  imageUrl= ${OPTARG};;
+            h)  howTo;;
             u)  filePath=${OPTARG}
                 upload;;
     esac
 done
 
+send_message
+
 exit 0
 
-# Change imgur script to accept a quiet mode. That only posts the hosted url. Change the upload function of 
-# this script to pull the output and then parse it to $imageUrl
+
