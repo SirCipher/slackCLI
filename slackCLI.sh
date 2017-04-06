@@ -3,10 +3,11 @@ message=""
 json=""
 imageUrl=""
 filePath=""
+webhook="https://hooks.slack.com/services/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"
 
 function send_message () {  
     create_payload
-    curl -s -d "payload=$json" https://hooks.slack.com/services/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
+    curl -s -d "payload=$json" ${webhook}
 }
 
 function howTo(){
@@ -28,10 +29,9 @@ function create_payload(){
         "attachments": [{
             "fallback": "",
             "color": "#36a64f",
-            "image_url": "https://a.slack-edge.com/ae57/img/slack_api_logo.png"
+            "image_url": "'${imageUrl}'"
         }]    
     }'
-    echo ${json}
 }
 
 # Uploads the file supplied. Updates the imageUrl variable for the payload.
@@ -58,7 +58,7 @@ if [ $# -eq 0 ]; then
     exit 1
 fi
 
-while getopts i:m:c:h:u: option
+while getopts i:m:h:u: option
 do
     case "${option}"
     in
