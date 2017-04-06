@@ -1,9 +1,16 @@
 #!/bin/bash
+
+# Script by Thomas Klapwijk. https://www.github.com/sircipher/slackCLI/
+# This script was designed to fulfill some CI requirements for an Android project.
+# As part of my final year university project.
+
 message=""
 json=""
 imageUrl=""
 filePath=""
 footer=""
+
+# Replace this variable with the Slack incoming webhook.
 webHook="https://hooks.slack.com/services/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"
 
 function send_message () {  
@@ -41,8 +48,14 @@ function create_payload(){
 function upload(){
     wget https://raw.githubusercontent.com/SirCipher/imgur.sh/master/imgur.sh
     chmod a+x imgur.sh
+
+    # Upload the file and get the file URL.
     imageUrl=$(./imgur.sh ${filePath})
+
+    # Cut the start of the string to get absolute URL.
     imageUrl="$( cut -d ':' -f 2- <<< "$imageUrl" )";
+
+    # Remove whitespace at start of retreived URL.
     imageUrl="${imageUrl#"${imageUrl%%[![:space:]]*}"}"
     echo ${imageUrl}
 }
@@ -77,5 +90,3 @@ done
 send_message
 
 exit 0
-
-
