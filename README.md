@@ -11,6 +11,7 @@ Features
     - Attack an image to the message.
     - Provide a local image to be uploaded and attached.
     - Add footer/author name to an image upload.
+    - A quiet mode that silences the output of curl.
 
 Requirements
 ------------
@@ -48,6 +49,7 @@ Basic usage
     -f Footer
     -i Image URL to attach
     -u Image to upload and attach
+    -q quiet mode. Stops curl output.
     -h Help
 ```
 
@@ -71,5 +73,9 @@ Adding a footer to the uploaded image
 Uploading an image
 ------------------
 ``` ./slackCLI.sh -u "file's local path" ```
+
+Quiet mode
+----------
+``` ./slackCLI.sh -q ```
 
 Image uploading is done with a fork of [Tremby's](https://github.com/tremby/imgur.sh) imgur.sh script. See the fork [here](https://github.com/SirCipher/imgur.sh).
