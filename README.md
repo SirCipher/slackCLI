@@ -73,9 +73,8 @@ Adding a footer to the uploaded image
 Uploading an image
 ------------------
 ``` ./slackCLI.sh -u "file's local path" ```
+Image uploading is done with a fork of [Tremby's](https://github.com/tremby/imgur.sh) imgur.sh script. See the fork [here](https://github.com/SirCipher/imgur.sh).
 
 Quiet mode
 ----------
 ``` ./slackCLI.sh -q ```
-
-Image uploading is done with a fork of [Tremby's](https://github.com/tremby/imgur.sh) imgur.sh script. See the fork [here](https://github.com/SirCipher/imgur.sh).
