@@ -10,6 +10,7 @@ Features
     - Send a message to a channel.
     - Attack an image to the message.
     - Provide a local image to be uploaded and attached.
+    - Add footer/author name to an image upload.
 
 Requirements
 ------------
@@ -55,6 +56,10 @@ Sending a message
 Adding an image
 ---------------
 ``` ./slackCLI.sh -i "url" ```
+
+Adding a footer to the uploaded image
+-------------------------------------
+``` ./slackCLI.sh -f "text" ```
 
 Uploading an image
 ------------------
