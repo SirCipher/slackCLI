@@ -28,9 +28,10 @@ function create_payload(){
         "attachments": [{
             "fallback": "",
             "color": "#36a64f",
-            "image_url": "'${imageUrl}'",
+            "image_url": "https://a.slack-edge.com/ae57/img/slack_api_logo.png"
         }]    
     }'
+    echo ${json}
 }
 
 # Uploads the file supplied. Updates the imageUrl variable for the payload.
@@ -62,8 +63,7 @@ do
     case "${option}"
     in
             m)  message=${OPTARG};;
-            i)  imageUrl=${OPTARG}
-                echo ${imageUrl};;
+            i)  imageUrl=${OPTARG};;
             h)  howTo;;
             u)  filePath=${OPTARG}
                 upload;;
