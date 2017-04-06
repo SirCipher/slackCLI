@@ -43,7 +43,14 @@ Using the script:
 =================
 Basic usage
 -----------
-``` ./slackCLI.sh [args] ```
+``` ./slackCLI.sh [args]
+    -m Message
+    -f Footer
+    -i Image URL to attach
+    -u Image to upload and attach
+    -h Help
+```
+
 
 Help 
 ----
