@@ -17,11 +17,8 @@ Requirements
 ------------
     - Curl
 
-Usage
-=====
-
-Set up the script:
-------------------
+Setting up the script:
+======================
 
 Clone the project:
 
