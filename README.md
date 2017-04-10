@@ -1,4 +1,4 @@
-# slackCLI
+# SlackCLI
 
 A very simple Slack command line interface (CLI) for Slack (Slack.com)
 ----------------------------------------------------------------------
