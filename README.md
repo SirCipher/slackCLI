@@ -8,7 +8,7 @@ This script was designed to fulfill some CI requirements for an Android project.
 Features
 --------
     - Send a message to a channel.
-    - Attack an image to the message.
+    - Attach an image to the message.
     - Provide a local image to be uploaded and attached.
     - Add footer/author name to an image upload.
     - A quiet mode that silences the output of curl.
