@@ -50,6 +50,15 @@ Basic usage
     -h Help
 ```
 
+Example usage on CircleCI. Capturing, pulling and uploading a screenshot from an Android device to a Slack chat
+---------------------------------------------------------------------------------------------------------------
+```    
+adb shell screencap -p /sdcard/screen.png
+adb pull /sdcard/screen.png
+wget https://raw.githubusercontent.com/SirCipher/slackCLI/master/slackCLI.sh
+chmod a+x slackCLI.sh
+./slackCLI.sh -m "CircleCI build no $CIRCLE_BUILD_NUM" -u "screen.png"
+```
 
 Help 
 ----
